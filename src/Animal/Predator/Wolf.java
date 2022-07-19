@@ -1,13 +1,14 @@
-package Animal.Herbivores;
+package Animal.Predator;
 
-import Animal.Animals;
 import lombok.Getter;
 
 @Getter
-public class Wolf extends Animals implements Herbivores{
+public class Wolf extends Predators {
+
+    public static final int maxCountOnLocation = 30;
 
     public Wolf() {
-        super(50, 3, 8, 30);
+        super(50, 3, 8);
     }
 
     @Override

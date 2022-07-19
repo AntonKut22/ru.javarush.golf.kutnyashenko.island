@@ -1,16 +1,18 @@
 package Animal;
 
-
+import Animal.Gender;
 import lombok.Getter;
+
 
 @Getter
 public abstract class Animals {
+
 
     private int setGender = (int) (Math.random() * 2);
 
     private final Gender gender;
 
-    private int health = 100;
+    private int satiety = 100;
 
     private int weight;
 
@@ -18,13 +20,11 @@ public abstract class Animals {
 
     private int KilogramToSaturate;
 
-    private int maxCountOnLocation;
 
-    public Animals(int weight, int speed, int kilogramToSaturate, int maxCountOnLocation) {
+    public Animals(int weight, int speed, int kilogramToSaturate) {
         this.weight = weight;
         this.speed = speed;
         this.KilogramToSaturate = kilogramToSaturate;
-        this.maxCountOnLocation = maxCountOnLocation;
         if (setGender == 0){
             this.gender = Gender.FEMALE;
         } else{
@@ -32,10 +32,14 @@ public abstract class Animals {
         }
     }
 
-    public abstract void eat();
+    public void eat(OneLocation oneLocation) {
+
+    }
 
     public abstract void reproduction();
 
-    public abstract void move();
+    public void move(){
+
+    }
 
 }
