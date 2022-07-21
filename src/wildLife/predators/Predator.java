@@ -6,7 +6,7 @@ import wildLife.Animals;
 public abstract class Predator extends Animals {
 
     @Override
-    public void eat(Location location) {
+    public void eat(Location location, Animals animal) {
 
     }
 }

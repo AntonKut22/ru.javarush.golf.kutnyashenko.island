@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class Herb {
 
-    private int count;
+    private double remainsHerb = 1;
 
 }

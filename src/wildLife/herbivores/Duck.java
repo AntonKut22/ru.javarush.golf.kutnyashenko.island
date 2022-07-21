@@ -1,4 +1,9 @@
 package wildLife.herbivores;
 
-public class Duck extends Herbivore{
+import lombok.Getter;
+
+public class Duck extends Herbivore {
+
+    @Getter
+    private static int maxCountOnLocation = 200;
 }

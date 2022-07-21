@@ -3,19 +3,32 @@ package wildLife;
 import island.Location;
 import island.Random;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 @Getter
 public abstract class Animals {
 
+    @Setter
     private boolean isLife = true;
 
+    @Setter
     private int satiety = 100;
 
+    private double weigh;
 
+    private int speed;
 
-    public abstract void eat(Location location);
+    private double needForFood;
+
+    public Animals(double weigh, int speed, double needForFood) {
+        this.weigh = weigh;
+        this.speed = speed;
+        this.needForFood = needForFood;
+    }
+
+    public abstract void eat(Location location, Animals animal);
 
     public SidesWorld directionOfMovement(){
 
@@ -28,6 +41,7 @@ public abstract class Animals {
     }
 
     public void reproduction(Location location){
+
 
     }
 
