@@ -5,16 +5,16 @@ import island.Random;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 @Getter
 public abstract class Animals {
+
+    private static int maxCountOnLocation;
 
     @Setter
     private boolean isLife = true;
 
     @Setter
-    private int satiety = 100;
+    private int hungry = 0;
 
     private double weigh;
 
@@ -30,9 +30,9 @@ public abstract class Animals {
 
     public abstract void eat(Location location, Animals animal);
 
-    public SidesWorld directionOfMovement(){
+    public SidesWorld directionOfMovement() {
 
-        return switch (Random.get(5)){
+        return switch (Random.get(4)) {
             case 1 -> SidesWorld.SOUTH;
             case 2 -> SidesWorld.EAST;
             case 3 -> SidesWorld.WEST;
@@ -40,9 +40,19 @@ public abstract class Animals {
         };
     }
 
-    public void reproduction(Location location){
+    public void reproduction(Location location, Animals animal) {
+        if (location.countCurrentAnimalOnLocation(animal) > 1 &&
+                (Animals.maxCountOnLocation - location.countCurrentAnimalOnLocation(animal)) > 2) {
+            location.addAnimal(animal);
+        }
+    }
 
+    public double percentToKilogram(Animals animal) {
+        return animal.getHungry() * animal.getNeedForFood() / 100;
+    }
 
+    public int kilogramToPercent(Animals animal, double weighEat) {
+        return (int) (weighEat * 100 / animal.getNeedForFood());
     }
 
 }

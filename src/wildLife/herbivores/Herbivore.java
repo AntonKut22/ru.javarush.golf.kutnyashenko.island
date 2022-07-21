@@ -1,6 +1,7 @@
 package wildLife.herbivores;
 
 import island.Location;
+import island.Random;
 import wildLife.Animals;
 import wildLife.Herb;
 
@@ -10,12 +11,22 @@ public abstract class Herbivore extends Animals {
         super(weigh, speed, needForFood);
     }
 
-    @Override
+    @Override //todo добавить сколько может съесть за один ход
     public void eat(Location location, Animals animal) {
-        while (animal.getSatiety() == 100 || location.getCountHerbsOnLocation() == 0){
-            Integer herbKey = location.getHerb() instanceof Herb;
-            double weighHerb = location.getHerb().get()
+        while (animal.getHungry() == 0 || location.getCountHerbsOnLocation() == 0){
+            int numberHerbOnList = Random.get(location.getHerb().size());
+            Herb herbRemains = location.getHerb().get(numberHerbOnList);
+            double weighHerb = herbRemains.getRemainsHerb();
+            double needEatForFullSatiety = animal.percentToKilogram(animal);
+            if (weighHerb > needEatForFullSatiety){
+                herbRemains.setRemainsHerb(weighHerb - needEatForFullSatiety);
+                animal.setHungry(100);
+            } else {
+                animal.setHungry(animal.kilogramToPercent(animal, weighHerb) + animal.getHungry());
+                location.deleteHerb(numberHerbOnList);
+            }
         }
-
     }
+
+
 }

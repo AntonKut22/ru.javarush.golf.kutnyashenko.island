@@ -8,8 +8,8 @@ import wildLife.Herb;
 import wildLife.herbivores.*;
 import wildLife.predators.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateIsland {
 
@@ -32,8 +32,8 @@ public class CreateIsland {
 
         for (int i = 0; i < island.length; i++) {
             for (int j = 0; j < island[i].length; j++) {
-                Map<Integer, Animals> animalsMap = new HashMap<>();
-                Map<Integer, Herb> herbMap = new HashMap<>();
+                List<Animals> animalsMap = new ArrayList<>();
+                List<Herb> herbMap = new ArrayList<>();
 
                 island[i][j] = new Location();
                 island[i][j].setCountAnimalsOnLocation(createMapAnimals(animalsMap));
@@ -45,15 +45,15 @@ public class CreateIsland {
         return island;
     }
 
-    private int createMapHerb(Map<Integer, Herb> herbMap){
+    private int createMapHerb(List<Herb> herbList){
         int countHerbOnLocation = Random.get(200);
         for (int i = 0; i < countHerbOnLocation; i++) {
-            herbMap.put(countHerbOnLocation++, new Herb());
+            herbList.add(new Herb());
         }
         return countHerbOnLocation;
     }
 
-    private int createMapAnimals(Map<Integer, Animals> animalsMap) {
+    private int createMapAnimals(List<Animals> animalsList) {
         int countAllAnimals = 0;
         AnimalArray[] listAnimals = AnimalArray.values();
         for (AnimalArray iterAnimal : listAnimals) {
@@ -62,91 +62,91 @@ public class CreateIsland {
                 case BUFFALO -> {
                     int count = Random.get(Buffalo.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Buffalo());
+                        animalsList.add(new Buffalo());
                     }
                 }
                 case DEER ->  {
                     int count = Random.get(Deer.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Deer());
+                        animalsList.add(new Deer());
                     }
                 }
                 case DUCK -> {
                     int count = Random.get(Duck.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Duck());
+                        animalsList.add(new Duck());
                     }
                 }
                 case GOAT -> {
                     int count = Random.get(Goat.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Goat());
+                        animalsList.add(new Goat());
                     }
                 }
                 case HORSE -> {
                     int count = Random.get(Horse.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Horse());
+                        animalsList.add(new Horse());
                     }
                 }
                 case MOUSE -> {
                     int count = Random.get(Mouse.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Mouse());
+                        animalsList.add(new Mouse());
                     }
                 }
                 case PIG -> {
                     int count = Random.get(Pig.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Pig());
+                        animalsList.add(new Pig());
                     }
                 }
                 case RABBIT -> {
                     int count = Random.get(Rabbit.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Rabbit());
+                        animalsList.add(new Rabbit());
                     }
                 }
                 case SHEEP -> {
                     int count = Random.get(Sheep.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Sheep());
+                        animalsList.add(new Sheep());
                     }
                 }
                 case WORM -> {
                     int count = Random.get(Worm.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Worm());
+                        animalsList.add(new Worm());
                     }
                 }
                 case BEAR -> {
                     int count = Random.get(Bear.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Bear());
+                        animalsList.add(new Bear());
                     }
                 }
                 case BOA -> {
                     int count = Random.get(Boa.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Boa());
+                        animalsList.add(new Boa());
                     }
                 }
                 case EAGLE -> {
                     int count = Random.get(Eagle.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Eagle());
+                        animalsList.add(new Eagle());
                     }
                 }
                 case FOX -> {
                     int count = Random.get(Fox.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Fox());
+                        animalsList.add(new Fox());
                     }
                 }
                 case WOLF -> {
                     int count = Random.get(Wolf.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {
-                        animalsMap.put(countAllAnimals++, new Wolf());
+                        animalsList.add(new Wolf());
                     }
                 }
             }
