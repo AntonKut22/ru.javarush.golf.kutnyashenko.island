@@ -12,21 +12,19 @@ public abstract class Herbivore extends Animals {
     }
 
     @Override //todo добавить сколько может съесть за один ход
-    public void eat(Location location, Animals animal) {
-        while (animal.getHungry() == 0 || location.getCountHerbsOnLocation() == 0){
+    public void eat(Location location) {
+        while (this.getHungry() != 0 || location.getCountHerbsOnLocation() == 0) {
             int numberHerbOnList = Random.get(location.getHerb().size());
             Herb herbRemains = location.getHerb().get(numberHerbOnList);
             double weighHerb = herbRemains.getRemainsHerb();
-            double needEatForFullSatiety = animal.percentToKilogram(animal);
-            if (weighHerb > needEatForFullSatiety){
+            double needEatForFullSatiety = this.percentHungryToKilogram();
+            if (weighHerb > needEatForFullSatiety) {
                 herbRemains.setRemainsHerb(weighHerb - needEatForFullSatiety);
-                animal.setHungry(100);
+                this.setHungry(0);
             } else {
-                animal.setHungry(animal.kilogramToPercent(animal, weighHerb) + animal.getHungry());
+                this.setHungry(this.getHungry() - this.kilogramToPercentHungry(weighHerb));
                 location.deleteHerb(numberHerbOnList);
             }
         }
     }
-
-
 }

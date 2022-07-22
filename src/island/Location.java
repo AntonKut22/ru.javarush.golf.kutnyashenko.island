@@ -37,8 +37,8 @@ public class Location {
         herb.remove(i);
     }
 
-    public void deleteAnimal(int i) {
-        animals.remove(i);
+    public void deleteAnimal(Animals animal) {
+        animals.remove(animal);
     }
 
     public void addAnimal(Animals animal) {

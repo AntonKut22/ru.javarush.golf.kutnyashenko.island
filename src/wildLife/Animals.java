@@ -22,13 +22,15 @@ public abstract class Animals {
 
     private double needForFood;
 
+//    public Map<String, Integer> chanceCatch;
+
     public Animals(double weigh, int speed, double needForFood) {
         this.weigh = weigh;
         this.speed = speed;
         this.needForFood = needForFood;
     }
 
-    public abstract void eat(Location location, Animals animal);
+    public abstract void eat(Location location);
 
     public SidesWorld directionOfMovement() {
 
@@ -47,12 +49,12 @@ public abstract class Animals {
         }
     }
 
-    public double percentToKilogram(Animals animal) {
-        return animal.getHungry() * animal.getNeedForFood() / 100;
+    public double percentHungryToKilogram() {
+        return this.getHungry() * this.getNeedForFood() / 100;
     }
 
-    public int kilogramToPercent(Animals animal, double weighEat) {
-        return (int) (weighEat * 100 / animal.getNeedForFood());
+    public int kilogramToPercentHungry(double weighEat) {
+        return (int) (weighEat * 100 / this.getNeedForFood());
     }
 
 }
