@@ -20,6 +20,7 @@ public class PrintStatictic implements Runnable{
 
     public void printAll() {
         Map<String, Integer> statisticAllIsland = new HashMap<>(); //TODO добавить инициализацию всеми животными
+        statisticAllIsland = InitAll.initAllAtIsland();
         for (int i = 0; i < island.length; i++) {
             for (int j = 0; j < island[i].length; j++) {
                 Map<String, Integer> statisticOnLocation = island[i][j].staticticAllAnimalOnLocation();
