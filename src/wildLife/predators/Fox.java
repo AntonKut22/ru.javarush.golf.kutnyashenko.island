@@ -1,12 +1,13 @@
 package wildLife.predators;
 
 import lombok.Getter;
+import wildLife.Predator;
 import wildLife.herbivores.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Fox extends Predator{
+public class Fox extends Predator {
 
     @Getter
     private Map<String, Integer> chanceCatch;

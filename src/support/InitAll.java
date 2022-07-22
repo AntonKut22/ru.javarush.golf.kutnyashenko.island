@@ -1,14 +1,12 @@
 package support;
 
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
-import org.reflections.Reflections;
 import wildLife.Animals;
-import wildLife.predators.Predator;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Predicate;
 
 public class InitAll {
 
@@ -18,15 +16,22 @@ public class InitAll {
     public static Map<String, Integer> initAllAtIsland() {
 
         Map<String, Integer> all = new HashMap<>();
+        all.put("Herb", 0);
 
+        ImmutableSet<ClassPath.ClassInfo> set = null;
         try {
-            List<Animals> list = ClassPath.from(Animals.class.getClassLoader()).getAllClasses().stream()
-                    .filter()
+            set = ClassPath.from(Animals.class.getClassLoader()).getAllClasses();
         } catch (IOException e) {
             throw new RuntimeException(e);
-
-
-            return all;
         }
+
+        for (ClassPath.ClassInfo classInfo : set) {
+            if (classInfo.getPackageName().equals("wildLife.herbivores")
+                    || classInfo.getPackageName().equals("wildLife.predators")
+                    || classInfo.getPackageName().equals("wildLife.herb")) {
+                all.put(classInfo.getSimpleName(), 0);
+            }
+        }
+        return all;
     }
 }

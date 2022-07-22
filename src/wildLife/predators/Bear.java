@@ -1,6 +1,7 @@
 package wildLife.predators;
 
 import lombok.Getter;
+import wildLife.Predator;
 import wildLife.herbivores.*;
 
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package wildLife;
+package wildLife.herb;
 
 import lombok.Getter;
 import lombok.Setter;

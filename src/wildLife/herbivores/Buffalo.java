@@ -1,9 +1,9 @@
 package wildLife.herbivores;
 
 import lombok.Getter;
-import wildLife.Animals;
+import wildLife.Herbivore;
 
-public class Buffalo extends Herbivore{
+public class Buffalo extends Herbivore {
 
     @Getter
     private static int maxCountOnLocation = 10;

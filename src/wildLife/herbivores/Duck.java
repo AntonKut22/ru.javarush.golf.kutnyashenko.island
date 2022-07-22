@@ -1,6 +1,7 @@
 package wildLife.herbivores;
 
 import lombok.Getter;
+import wildLife.Herbivore;
 
 public class Duck extends Herbivore {
 

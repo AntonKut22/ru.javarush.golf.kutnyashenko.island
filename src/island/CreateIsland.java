@@ -1,11 +1,10 @@
 package island;
 
 
-import lombok.Getter;
 import support.RandomNumber;
 import wildLife.Animals;
 import wildLife.AnimalArray;
-import wildLife.Herb;
+import wildLife.herb.Herb;
 import wildLife.herbivores.*;
 import wildLife.predators.*;
 

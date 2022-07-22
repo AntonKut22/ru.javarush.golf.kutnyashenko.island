@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import wildLife.Animals;
-import wildLife.Herb;
+import wildLife.herb.Herb;
 
 import java.util.HashMap;
 import java.util.List;
@@ -53,6 +53,14 @@ public class Location implements Runnable{
             }
         }
         return staticticAnimal;
+    }
+
+    public Map<String, Integer> statisticHerbOnLocation(){
+        Map<String, Integer> statisticHerb = new HashMap<>();
+        for (Herb herb1 : herb) {
+            statisticHerb.put(herb1.getClass().getSimpleName(), countHerbsOnLocation);
+        }
+        return statisticHerb;
     }
 
     public void deleteHerb(int i) {

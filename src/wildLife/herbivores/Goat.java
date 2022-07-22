@@ -1,8 +1,9 @@
 package wildLife.herbivores;
 
 import lombok.Getter;
+import wildLife.Herbivore;
 
-public class Goat extends Herbivore{
+public class Goat extends Herbivore {
 
     public Goat() {
         super(60, 3, 10);

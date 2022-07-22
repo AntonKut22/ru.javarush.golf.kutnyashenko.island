@@ -1,8 +1,9 @@
 package wildLife.herbivores;
 
 import lombok.Getter;
+import wildLife.Herbivore;
 
-public class Worm extends Herbivore{
+public class Worm extends Herbivore {
 
     public Worm() {
         super(0.01, 0, 0);

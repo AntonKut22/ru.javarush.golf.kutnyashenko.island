@@ -1,4 +1,4 @@
-package wildLife.predators;
+package wildLife;
 
 import island.Location;
 import support.RandomNumber;

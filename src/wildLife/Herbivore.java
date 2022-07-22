@@ -1,9 +1,8 @@
-package wildLife.herbivores;
+package wildLife;
 
 import island.Location;
 import support.RandomNumber;
-import wildLife.Animals;
-import wildLife.Herb;
+import wildLife.herb.Herb;
 
 public abstract class Herbivore extends Animals {
 
