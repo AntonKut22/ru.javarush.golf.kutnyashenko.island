@@ -1,7 +1,7 @@
 package wildLife.predators;
 
 import island.Location;
-import island.Random;
+import support.RandomNumber;
 import lombok.Getter;
 import wildLife.Animals;
 
@@ -24,10 +24,10 @@ public abstract class Predator extends Animals {
         List<Animals> animalsForEat = getAnimalsForEat(location);
 
         while (this.getHungry() != 0 || !animalsForEat.isEmpty()) {
-            int numberExtractionInList = Random.get(animalsForEat.size());
+            int numberExtractionInList = RandomNumber.get(animalsForEat.size());
             Animals extraction = animalsForEat.get(numberExtractionInList);
             double percetLucky = this.getChanceCatch().get(extraction.getClass().getSimpleName());
-            if (Random.get(100) > percetLucky) {
+            if (RandomNumber.get(100) > percetLucky) {
                 break;
             }
             double needEatForFullSatiety = this.percentHungryToKilogram();

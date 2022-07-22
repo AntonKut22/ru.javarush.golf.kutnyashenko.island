@@ -1,26 +1,18 @@
 import island.CreateIsland;
 import island.Location;
-import wildLife.Animals;
-import wildLife.herbivores.Buffalo;
-import wildLife.herbivores.Mouse;
+import support.PrintStatictic;
 import wildLife.predators.Bear;
-import wildLife.predators.Predator;
-
-import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class Game {
 
     public static void main(String[] args) {
 
-        CreateIsland newIsland = new CreateIsland(10, 10);
+        Location[][] newIsland = CreateIsland.createIsland(5, 5);
 
-        Location[][] island = newIsland.createIsland();
+//        Location[][] island = newIsland.createIsland();
 
-        Bear bear = new Bear();
-        bear.eat(island[0][0]);
+        PrintStatictic printStatictic = new PrintStatictic(newIsland);
+        printStatictic.printAll();
 
 
 

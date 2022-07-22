@@ -1,7 +1,7 @@
 package wildLife.herbivores;
 
 import island.Location;
-import island.Random;
+import support.RandomNumber;
 import wildLife.Animals;
 import wildLife.Herb;
 
@@ -14,7 +14,7 @@ public abstract class Herbivore extends Animals {
     @Override //todo добавить сколько может съесть за один ход
     public void eat(Location location) {
         while (this.getHungry() != 0 || location.getCountHerbsOnLocation() == 0) {
-            int numberHerbOnList = Random.get(location.getHerb().size());
+            int numberHerbOnList = RandomNumber.get(location.getHerb().size());
             Herb herbRemains = location.getHerb().get(numberHerbOnList);
             double weighHerb = herbRemains.getRemainsHerb();
             double needEatForFullSatiety = this.percentHungryToKilogram();

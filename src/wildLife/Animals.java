@@ -1,7 +1,8 @@
 package wildLife;
 
 import island.Location;
-import island.Random;
+import island.Sides;
+import support.RandomNumber;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,13 +33,13 @@ public abstract class Animals {
 
     public abstract void eat(Location location);
 
-    public SidesWorld directionOfMovement() {
+    public Sides directionOfMovement() {
 
-        return switch (Random.get(4)) {
-            case 1 -> SidesWorld.SOUTH;
-            case 2 -> SidesWorld.EAST;
-            case 3 -> SidesWorld.WEST;
-            default -> SidesWorld.NORTH;
+        return switch (RandomNumber.get(4)) {
+            case 1 -> Sides.DOWN;
+            case 2 -> Sides.LEFT;
+            case 3 -> Sides.RIGHT;
+            default -> Sides.UP;
         };
     }
 
