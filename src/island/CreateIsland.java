@@ -32,34 +32,34 @@ public class CreateIsland {
 
         for (int i = 0; i < island.length; i++) {
             for (int j = 0; j < island[i].length; j++) {
-                List<Animals> animalsMap = new ArrayList<>();
-                List<Herb> herbMap = new ArrayList<>();
+                List<Animals> animalsList = new ArrayList<>();
+                List<Herb> herbList = new ArrayList<>();
 
-                island[i][j] = new Location(i - 1, island.length - i - 1,
-                        j - 1, island[i].length - j - 1);
-                island[i][j].setCountAnimalsOnLocation(createMapAnimals(animalsMap));
-                island[i][j].setCountHerbsOnLocation(createMapHerb(herbMap));
-                island[i][j].setAnimals(animalsMap);
-                island[i][j].setHerb(herbMap);
+                island[i][j] = new Location(island, i, island.length - i - 1,
+                        j, island[i].length - j - 1);
+                island[i][j].setCountAnimalsOnLocation(createListAnimals(animalsList));
+                island[i][j].setCountHerbsOnLocation(createListHerb(herbList, island[i][j]));
+                island[i][j].setAnimals(animalsList);
+                island[i][j].setHerb(herbList);
             }
         }
         return island;
     }
 
-    private static int createMapHerb(List<Herb> herbList){
+    private static int createListHerb(List<Herb> herbList, Location location){
         int countHerbOnLocation = RandomNumber.get(Herb.getMaxCountOnLocation());
         for (int i = 0; i < countHerbOnLocation; i++) {
-            herbList.add(new Herb());
+            herbList.add(new Herb(location));
         }
         return countHerbOnLocation;
     }
 
-    private static int createMapAnimals(List<Animals> animalsList) {
+    private static int createListAnimals(List<Animals> animalsList) {
         int countAllAnimals = 0;
         AnimalArray[] listAnimals = AnimalArray.values();
         for (AnimalArray iterAnimal : listAnimals) {
             switch (iterAnimal)
-            {
+            { //TODO Упростить
                 case BUFFALO -> {
                     int count = RandomNumber.get(Buffalo.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {

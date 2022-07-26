@@ -1,7 +1,7 @@
 package wildLife;
 
 import island.Location;
-import island.Sides;
+import support.Sides;
 import support.RandomNumber;
 import lombok.Getter;
 import lombok.Setter;

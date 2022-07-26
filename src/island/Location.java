@@ -3,6 +3,8 @@ package island;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import support.RandomNumber;
+import support.Sides;
 import wildLife.Animals;
 import wildLife.herb.Herb;
 
@@ -20,12 +22,14 @@ public class Location implements Runnable{
     private List<Animals> animals;
     private List<Herb> herb;
 
+    private Location[][] island;
     private int maxUp;
     private int maxDown;
     private int maxLeft;
     private int maxRight;
 
-    public Location(int maxUp, int maxDown, int maxLeft, int maxRight) {
+    public Location(Location[][] island, int maxUp, int maxDown, int maxLeft, int maxRight) {
+        this.island = island;
         this.maxUp = maxUp;
         this.maxDown = maxDown;
         this.maxLeft = maxLeft;
@@ -67,13 +71,14 @@ public class Location implements Runnable{
         herb.remove(i);
     }
 
-    public void addHerb() {
-        if (countHerbsOnLocation > (Herb.getMaxCountOnLocation() - 10)) {
-            countHerbsOnLocation = Herb.getMaxCountOnLocation();
-        } else {
-            countHerbsOnLocation += 10;
-        }
-    }
+
+//    public void addHerb() {
+//        if (countHerbsOnLocation > (Herb.getMaxCountOnLocation() - 10)) {
+//            countHerbsOnLocation = Herb.getMaxCountOnLocation();
+//        } else {
+//            countHerbsOnLocation += 10;
+//        }
+//    }
 
     public void deleteAnimal(Animals animal) {
         animals.remove(animal);
@@ -94,7 +99,29 @@ public class Location implements Runnable{
     }
 
     public void moveAnimals(Animals animals) {
-
+        Sides sides = animals.directionOfMovement();
+        switch (sides) { //TODO добавить проверку на максимальное количество животных в локации
+            case UP -> {
+                int stepSize = RandomNumber.get(maxUp);
+                island[maxUp - stepSize][maxLeft].addAnimal(animals);
+                deleteAnimal(animals);
+            }
+            case DOWN -> {
+                int stepSize = RandomNumber.get(maxDown);
+                island[maxUp + stepSize][maxLeft].addAnimal(animals);
+                deleteAnimal(animals);
+            }
+            case LEFT -> {
+                int stepSize = RandomNumber.get(maxLeft);
+                island[maxUp][maxLeft - stepSize].addAnimal(animals);
+                deleteAnimal(animals);
+            }
+            case RIGHT -> {
+                int stepSize = RandomNumber.get(maxRight);
+                island[maxUp][maxLeft + stepSize].addAnimal(animals);
+                deleteAnimal(animals);
+            }
+        }
     }
 
     @Override

@@ -2,12 +2,11 @@ package support;
 
 import island.Location;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class PrintStatictic implements Runnable{
 
-    Location[][] island;
+    private Location[][] island;
 
     public PrintStatictic(Location[][] island) {
         this.island = island;

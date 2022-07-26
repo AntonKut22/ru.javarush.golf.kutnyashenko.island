@@ -8,15 +8,16 @@ import wildLife.Animals;
 import java.io.IOException;
 import java.util.*;
 
-public class InitAll {
+public final class InitAll {
 
-    private Map<String, Integer> initAll;
+//    private Map<String, Integer> initAll;
+
 
 
     public static Map<String, Integer> initAllAtIsland() {
 
         Map<String, Integer> all = new HashMap<>();
-        all.put("Herb", 0);
+//        all.put("Herb", 0);
 
         ImmutableSet<ClassPath.ClassInfo> set = null;
         try {
