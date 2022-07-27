@@ -26,8 +26,8 @@ public abstract class Predator extends Animals {
         while (this.getHungry() != 0 || !animalsForEat.isEmpty()) {
             int numberExtractionInList = RandomNumber.get(animalsForEat.size());
             Animals extraction = animalsForEat.get(numberExtractionInList);
-            double percetLucky = this.getChanceCatch().get(extraction.getClass().getSimpleName());
-            if (RandomNumber.get(100) > percetLucky) {
+            double percentLucky = this.getChanceCatch().get(extraction.getClass().getSimpleName());
+            if (RandomNumber.get(100) > percentLucky) {
                 break;
             }
             double needEatForFullSatiety = this.percentHungryToKilogram();
@@ -37,7 +37,6 @@ public abstract class Predator extends Animals {
             } else {
                 this.setHungry(this.getHungry() - this.kilogramToPercentHungry(extraction.getWeigh()));
             }
-
         }
     }
 

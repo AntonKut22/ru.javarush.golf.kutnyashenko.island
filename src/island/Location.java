@@ -38,7 +38,7 @@ public class Location implements Runnable{
 
     public void printAllAnimals() {
 
-        Map<String, Integer> staticticAnimal = staticticAllAnimalOnLocation();
+        Map<String, Integer> staticticAnimal = statisticAllAnimalOnLocation();
         for (Map.Entry<String, Integer> stringIntegerEntry : staticticAnimal.entrySet()) {
             System.out.println(stringIntegerEntry.getKey() + " - " + stringIntegerEntry.getValue());
         }
@@ -46,17 +46,17 @@ public class Location implements Runnable{
         System.out.println("Растений - " + countHerbsOnLocation);
     }
 
-    public Map<String, Integer> staticticAllAnimalOnLocation() {
-        Map<String, Integer> staticticAnimal = new HashMap<>();
+    public Map<String, Integer> statisticAllAnimalOnLocation() {
+        Map<String, Integer> statisticAnimal = new HashMap<>();
         for (Animals animal : animals) {
-            if (!staticticAnimal.containsKey(animal.getClass().getSimpleName())) {
-                staticticAnimal.put(animal.getClass().getSimpleName(), 1);
+            if (!statisticAnimal.containsKey(animal.getClass().getSimpleName())) {
+                statisticAnimal.put(animal.getClass().getSimpleName(), 1);
             } else {
-                staticticAnimal.put(animal.getClass().getSimpleName(),
-                        staticticAnimal.get(animal.getClass().getSimpleName()) + 1);
+                statisticAnimal.put(animal.getClass().getSimpleName(),
+                        statisticAnimal.get(animal.getClass().getSimpleName()) + 1);
             }
         }
-        return staticticAnimal;
+        return statisticAnimal;
     }
 
     public Map<String, Integer> statisticHerbOnLocation(){
@@ -72,13 +72,13 @@ public class Location implements Runnable{
     }
 
 
-//    public void addHerb() {
-//        if (countHerbsOnLocation > (Herb.getMaxCountOnLocation() - 10)) {
-//            countHerbsOnLocation = Herb.getMaxCountOnLocation();
-//        } else {
-//            countHerbsOnLocation += 10;
-//        }
-//    }
+    public void addHerb() {
+        if (countHerbsOnLocation > (Herb.getMaxCountOnLocation() - 1)) {
+            countHerbsOnLocation = Herb.getMaxCountOnLocation();
+        } else {
+            countHerbsOnLocation += 0;
+        }
+    }
 
     public void deleteAnimal(Animals animal) {
         animals.remove(animal);

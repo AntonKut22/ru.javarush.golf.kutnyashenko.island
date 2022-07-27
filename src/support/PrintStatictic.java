@@ -21,7 +21,7 @@ public class PrintStatictic implements Runnable{
         Map<String, Integer> statisticAllIsland = InitAll.initAllAtIsland();
         for (int i = 0; i < island.length; i++) {
             for (int j = 0; j < island[i].length; j++) {
-                Map<String, Integer> statisticAnimalsOnLocation = island[i][j].staticticAllAnimalOnLocation();
+                Map<String, Integer> statisticAnimalsOnLocation = island[i][j].statisticAllAnimalOnLocation();
                 Map<String, Integer> statisticHerbOnLocation = island[i][j].statisticHerbOnLocation();
                 statisticHerbOnLocation.forEach((k, v) -> statisticAllIsland.merge(k, v, Integer::sum));
                 statisticAnimalsOnLocation.forEach((k, v) -> statisticAllIsland.merge(k, v, Integer::sum));
@@ -30,6 +30,7 @@ public class PrintStatictic implements Runnable{
         for (Map.Entry<String, Integer> stringIntegerEntry : statisticAllIsland.entrySet()) {
             System.out.println(stringIntegerEntry.getKey() + " - " + stringIntegerEntry.getValue());
         }
+        System.out.println("-------------------------------------------------------------------------------");
     }
 }
 

@@ -1,17 +1,22 @@
 package island;
 
 
-import lombok.Getter;
 import support.PrintStatictic;
-import thread.GrowHerb;
+import thread.ActivityAnimals;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
+// В данный момент не используется, наверное нужн будет удалить
+
 public class IslandLife implements Runnable {
 
-    public Location[][] island = CreateIsland.createIsland(10, 10);
+    public Location[][] island;
+
+    public IslandLife(int x, int y) {
+        this.island = CreateIsland.createIsland(x, y);
+    }
 
     @Override
     public void run() {
@@ -25,11 +30,23 @@ public class IslandLife implements Runnable {
             }
         }
 
-        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(3);
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(3);
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-        executorService.scheduleAtFixedRate(new GrowHerb(locationList), 0, 5, TimeUnit.SECONDS);
-        executorService.scheduleAtFixedRate(new PrintStatictic(island), 0, 5, TimeUnit.SECONDS);
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
+            for (Location location : locationList) {
+                location.addHerb();
+            }
+        }, 0, 5, TimeUnit.SECONDS);
 
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
+
+            for (Location location : locationList) {
+                executorService.submit(new ActivityAnimals(location));
+            }
+        }, 0, 5, TimeUnit.SECONDS);
+
+        scheduledExecutorService.scheduleAtFixedRate(new PrintStatictic(island), 1, 5, TimeUnit.SECONDS);
 
     }
 }

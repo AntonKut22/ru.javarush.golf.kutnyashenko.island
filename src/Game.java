@@ -1,45 +1,48 @@
 import island.CreateIsland;
 import island.Location;
 import support.PrintStatictic;
-import wildLife.predators.Bear;
+import thread.ActivityAnimals;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Game {
 
     public static void main(String[] args) {
 
-        Location[][] newIsland = CreateIsland.createIsland(5, 5);
+//        IslandLife islandLife = new IslandLife(2, 2);
 
-//        Location[][] island = newIsland.createIsland();
+        Location[][] island = CreateIsland.createIsland(2, 2);
 
-        PrintStatictic printStatictic = new PrintStatictic(newIsland);
-        printStatictic.printAll();
+        List<Location> locationList = new ArrayList<>();
 
+        for (int i = 0; i < island.length; i++) {
+            for (int j = 0; j < island[i].length; j++) {
+                locationList.add(island[i][j]);
+            }
+        }
 
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(3);
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-//        island[0][0].printAllAnimals();
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
+            for (Location location : locationList) {
+                location.addHerb();
+            }
+        }, 0, 5, TimeUnit.SECONDS);
 
-//        Mouse mouse = new Mouse();
-//        String nameMouseClass = mouse.getClass().getSimpleName();
-//
-//        List<Animals> test = island[0][0].getAnimals().stream().
-//                filter(animals -> animals instanceof Predator).collect(Collectors.toList());
-//        for (Animals animals : test) {
-//            if (animals instanceof Bear) {
-//                if (((Bear) animals).getChanceCatch().containsKey(nameMouseClass)) {
-//                    System.out.println("Медведь съел мышь");
-//                }
-//            }
-//        }
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
 
-//        Mouse mouse = new Mouse();
-//        System.out.println(island[0][0].countCurrentAnimalOnLocation(mouse));
+            for (Location location : locationList) {
+                executorService.submit(new ActivityAnimals(location));
+            }
+        }, 0, 5, TimeUnit.SECONDS);
 
-
-//        for (Map.Entry<Integer, Animals> integerAnimalsEntry : island[0][0].getAnimals().entrySet()) {
-//            if (integerAnimalsEntry instanceof Buffalo){
-//                integerAnimalsEntry.getValue().setLife(false);
-//            }
-//        }
+        scheduledExecutorService.scheduleAtFixedRate(new PrintStatictic(island), 1, 5, TimeUnit.SECONDS);
 
     }
 
