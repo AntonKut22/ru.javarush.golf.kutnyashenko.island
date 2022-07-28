@@ -73,10 +73,10 @@ public class Location implements Runnable{
 
 
     public void addHerb() {
-        if (countHerbsOnLocation > (Herb.getMaxCountOnLocation() - 1)) {
+        if (countHerbsOnLocation > (Herb.getMaxCountOnLocation() - 10)) {
             countHerbsOnLocation = Herb.getMaxCountOnLocation();
         } else {
-            countHerbsOnLocation += 0;
+            countHerbsOnLocation += 10;
         }
     }
 

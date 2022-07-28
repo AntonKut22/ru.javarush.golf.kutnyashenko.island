@@ -20,10 +20,8 @@ public class ActivityAnimals implements Runnable{
 
             animal.setHungry(animal.getHungry() + 10);
 
-
             if (animal.getHungry() > 100){
                 location.deleteAnimal(animal);
-                return;
             } else if (animal.getHungry() > 50) {
                 animal.eat(location);
             } else {
