@@ -13,20 +13,6 @@ import java.util.List;
 
 public class CreateIsland {
 
-//    private int width;
-//    private int height;
-//
-//    @Getter
-//    private Location[][] island;
-//
-//
-//
-//
-//    public CreateIsland(int width, int height) {
-//        this.width = width;
-//        this.height = height;
-//    }
-
     public static Location[][] createIsland(int width, int height) {
         Location[][] island = new Location[width][height];
 

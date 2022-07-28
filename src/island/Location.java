@@ -15,7 +15,7 @@ import java.util.Map;
 @ToString
 @Getter
 @Setter
-public class Location implements Runnable{
+public class Location {
 
     private int countAnimalsOnLocation = 0;
     private int countHerbsOnLocation = 0;
@@ -36,6 +36,8 @@ public class Location implements Runnable{
         this.maxRight = maxRight;
     }
 
+
+    // реализовал статистику по каждой локации, но в данной реализации не использую
     public void printAllAnimals() {
 
         Map<String, Integer> staticticAnimal = statisticAllAnimalOnLocation();
@@ -59,7 +61,7 @@ public class Location implements Runnable{
         return statisticAnimal;
     }
 
-    public Map<String, Integer> statisticHerbOnLocation(){
+    public Map<String, Integer> statisticHerbOnLocation() {
         Map<String, Integer> statisticHerb = new HashMap<>();
         for (Herb herb1 : herb) {
             statisticHerb.put(herb1.getClass().getSimpleName(), countHerbsOnLocation);
@@ -124,8 +126,25 @@ public class Location implements Runnable{
         }
     }
 
-    @Override
-    public void run() {
+    public void activityAnimals() {
+        this.getAnimals().forEach(animal -> {
+            animal.setHungry(animal.getHungry() + 10);
+
+            if (animal.getHungry() > 100) {
+                this.deleteAnimal(animal);
+            } else if (animal.getHungry() > 50) {
+                animal.eat(this);
+            } else {
+
+                if (RandomNumber.get(2) == 1) {
+                    animal.reproduction(this, animal);
+                } else {
+                    this.moveAnimals(animal);
+                }
+            }
+        });
+
 
     }
+
 }

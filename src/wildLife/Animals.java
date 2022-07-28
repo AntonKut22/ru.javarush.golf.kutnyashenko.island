@@ -12,9 +12,6 @@ public abstract class Animals {
     private static int maxCountOnLocation;
 
     @Setter
-    private boolean isLife = true;
-
-    @Setter
     private int hungry = 0;
 
     private double weigh;
@@ -23,7 +20,6 @@ public abstract class Animals {
 
     private double needForFood;
 
-//    public Map<String, Integer> chanceCatch;
 
     public Animals(double weigh, int speed, double needForFood) {
         this.weigh = weigh;
@@ -45,7 +41,7 @@ public abstract class Animals {
 
     public void reproduction(Location location, Animals animal) {
         if (location.countCurrentAnimalOnLocation(animal) > 1 &&
-                (Animals.maxCountOnLocation - location.countCurrentAnimalOnLocation(animal)) > 2) {
+                (maxCountOnLocation - location.countCurrentAnimalOnLocation(animal)) > 2) {
             location.addAnimal(animal);
         }
     }

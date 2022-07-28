@@ -3,7 +3,6 @@ package wildLife;
 import island.Location;
 import support.RandomNumber;
 import lombok.Getter;
-import wildLife.Animals;
 
 import java.util.List;
 import java.util.Map;
