@@ -28,8 +28,7 @@ public class Location {
     private int maxLeft;
     private int maxRight;
 
-    public Location(Location[][] island, int maxUp, int maxDown, int maxLeft, int maxRight) {
-        this.island = island;
+    public Location(int maxUp, int maxDown, int maxLeft, int maxRight) {
         this.maxUp = maxUp;
         this.maxDown = maxDown;
         this.maxLeft = maxLeft;
@@ -143,8 +142,6 @@ public class Location {
                 }
             }
         });
-
-
     }
 
 }
