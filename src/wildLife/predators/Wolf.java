@@ -32,4 +32,9 @@ public class Wolf extends Predator {
     @Getter
     private static int maxCountOnLocation = 30;
 
+    @Override
+    public int getMaxCountAnimalsOnLocation() {
+        return maxCountOnLocation;
+    }
+
 }

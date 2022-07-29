@@ -12,6 +12,9 @@ public class Buffalo extends Herbivore {
         super(700, 3, 100);
     }
 
-
+    @Override
+    public int getMaxCountAnimalsOnLocation() {
+        return maxCountOnLocation;
+    }
 
 }

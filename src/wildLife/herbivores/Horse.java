@@ -11,4 +11,9 @@ public class Horse extends Herbivore {
 
     @Getter
     private static int maxCountOnLocation = 20;
+
+    @Override
+    public int getMaxCountAnimalsOnLocation() {
+        return maxCountOnLocation;
+    }
 }

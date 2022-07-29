@@ -41,7 +41,7 @@ public abstract class Animals {
 
     public void reproduction(Location location, Animals animal) {
         if (location.countCurrentAnimalOnLocation(animal) > 1 &&
-                (maxCountOnLocation - location.countCurrentAnimalOnLocation(animal)) > 2) {
+                (animal.getMaxCountAnimalsOnLocation() - location.countCurrentAnimalOnLocation(animal)) > 2) {
             location.addAnimal(animal);
         }
     }
@@ -52,6 +52,10 @@ public abstract class Animals {
 
     public int kilogramToPercentHungry(double weighEat) {
         return (int) (weighEat * 100 / this.getNeedForFood());
+    }
+
+    public int getMaxCountAnimalsOnLocation(){
+        return maxCountOnLocation;
     }
 
 }

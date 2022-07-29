@@ -13,6 +13,9 @@ import java.util.List;
 
 public class CreateIsland {
 
+    private CreateIsland() {
+    }
+
     public static Location[][] createIsland(int width, int height) {
         Location[][] island = new Location[width][height];
 
@@ -45,7 +48,7 @@ public class CreateIsland {
         AnimalArray[] listAnimals = AnimalArray.values();
         for (AnimalArray iterAnimal : listAnimals) {
             switch (iterAnimal)
-            { //TODO Упростить
+            {
                 case BUFFALO -> {
                     int count = RandomNumber.get(Buffalo.getMaxCountOnLocation());
                     for (int i = 0; i < count; i++) {

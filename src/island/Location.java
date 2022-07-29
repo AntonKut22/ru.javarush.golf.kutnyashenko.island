@@ -101,26 +101,34 @@ public class Location {
 
     public void moveAnimals(Animals animals) {
         Sides sides = animals.directionOfMovement();
-        switch (sides) { //TODO добавить проверку на максимальное количество животных в локации
+        switch (sides) {
             case UP -> {
                 int stepSize = RandomNumber.get(maxUp);
-                island[maxUp - stepSize][maxLeft].addAnimal(animals);
-                deleteAnimal(animals);
+                if (island[maxUp - stepSize][maxLeft].countCurrentAnimalOnLocation(animals) < animals.getMaxCountAnimalsOnLocation()) {
+                    island[maxUp - stepSize][maxLeft].addAnimal(animals);
+                    deleteAnimal(animals);
+                }
             }
             case DOWN -> {
                 int stepSize = RandomNumber.get(maxDown);
-                island[maxUp + stepSize][maxLeft].addAnimal(animals);
-                deleteAnimal(animals);
+                if (island[maxUp + stepSize][maxLeft].countCurrentAnimalOnLocation(animals) < animals.getMaxCountAnimalsOnLocation()) {
+                    island[maxUp + stepSize][maxLeft].addAnimal(animals);
+                    deleteAnimal(animals);
+                }
             }
             case LEFT -> {
                 int stepSize = RandomNumber.get(maxLeft);
-                island[maxUp][maxLeft - stepSize].addAnimal(animals);
-                deleteAnimal(animals);
+                if (island[maxUp][maxLeft - stepSize].countCurrentAnimalOnLocation(animals) < animals.getMaxCountAnimalsOnLocation()) {
+                    island[maxUp][maxLeft - stepSize].addAnimal(animals);
+                    deleteAnimal(animals);
+                }
             }
             case RIGHT -> {
                 int stepSize = RandomNumber.get(maxRight);
-                island[maxUp][maxLeft + stepSize].addAnimal(animals);
-                deleteAnimal(animals);
+                if (island[maxUp][maxLeft + stepSize].countCurrentAnimalOnLocation(animals) < animals.getMaxCountAnimalsOnLocation()) {
+                    island[maxUp][maxLeft + stepSize].addAnimal(animals);
+                    deleteAnimal(animals);
+                }
             }
         }
     }

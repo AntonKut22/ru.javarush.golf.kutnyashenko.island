@@ -11,4 +11,9 @@ public class Worm extends Herbivore {
 
     @Getter
     private static int maxCountOnLocation = 1000;
+
+    @Override
+    public int getMaxCountAnimalsOnLocation() {
+        return maxCountOnLocation;
+    }
 }

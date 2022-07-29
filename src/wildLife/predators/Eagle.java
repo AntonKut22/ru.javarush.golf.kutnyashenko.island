@@ -26,4 +26,9 @@ public class Eagle extends Predator {
 
     @Getter
     private static int maxCountOnLocation = 20;
+
+    @Override
+    public int getMaxCountAnimalsOnLocation() {
+        return maxCountOnLocation;
+    }
 }

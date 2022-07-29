@@ -11,4 +11,9 @@ public class Rabbit extends Herbivore {
 
     @Getter
     private static int maxCountOnLocation = 150;
+
+    @Override
+    public int getMaxCountAnimalsOnLocation() {
+        return maxCountOnLocation;
+    }
 }

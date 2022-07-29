@@ -1,11 +1,12 @@
 import island.CreateIsland;
 import island.Location;
-import support.PrintStatictic;
+import support.PrintStatistic;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -36,20 +37,16 @@ public class Game {
                 y = Integer.parseInt(reader.readLine());
             }
 
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
 
         Location[][] island = CreateIsland.createIsland(x, y);
 
         List<Location> locationList = new ArrayList<>();
 
-        for (int i = 0; i < island.length; i++) {
-            for (int j = 0; j < island[i].length; j++) {
-                locationList.add(island[i][j]);
-            }
+        for (Location[] locations : island) {
+            locationList.addAll(Arrays.asList(locations));
         }
 
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(3);
@@ -61,7 +58,7 @@ public class Game {
         scheduledExecutorService.scheduleAtFixedRate(() -> locationList.forEach(location ->
                 executorService.submit(location::activityAnimals)), 0, 1, TimeUnit.SECONDS);
 
-        PrintStatictic printStatictic = new PrintStatictic(island);
+        PrintStatistic printStatictic = new PrintStatistic(island);
         scheduledExecutorService.scheduleAtFixedRate(printStatictic, 1, 5, TimeUnit.SECONDS);
     }
 
