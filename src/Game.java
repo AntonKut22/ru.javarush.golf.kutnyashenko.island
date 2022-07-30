@@ -41,26 +41,24 @@ public class Game {
             throw new RuntimeException(e);
         }
 
-        Location[][] island = CreateIsland.createIsland(x, y);
+        Location[][] islandModel = CreateIsland.createIsland(x, y);
 
         List<Location> locationList = new ArrayList<>();
 
-        for (Location[] locations : island) {
+        for (Location[] locations : islandModel) {
             locationList.addAll(Arrays.asList(locations));
         }
 
-        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(3);
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(6);
+        ExecutorService executorService = Executors.newCachedThreadPool();
 
-        scheduledExecutorService.scheduleAtFixedRate(() ->
-                locationList.forEach(Location::addHerb), 0, 1, TimeUnit.SECONDS);
+        scheduledExecutorService.scheduleAtFixedRate(() -> locationList.forEach(location ->
+                executorService.submit(location::addHerb)), 0, 1, TimeUnit.SECONDS);
 
         scheduledExecutorService.scheduleAtFixedRate(() -> locationList.forEach(location ->
                 executorService.submit(location::activityAnimals)), 0, 1, TimeUnit.SECONDS);
 
-//        scheduledExecutorService.scheduleAtFixedRate(locationList.get(0).printAllAnimals(), 1, 5, TimeUnit.SECONDS);
-
-        PrintStatistic printStatistic = new PrintStatistic(island);
+        PrintStatistic printStatistic = new PrintStatistic(islandModel);
         scheduledExecutorService.scheduleAtFixedRate(printStatistic, 1, 5, TimeUnit.SECONDS);
     }
 

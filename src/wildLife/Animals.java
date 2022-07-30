@@ -39,10 +39,10 @@ public abstract class Animals {
         };
     }
 
-    public void reproduction(Location location, Animals animal) {
-        if (location.countCurrentAnimalOnLocation(animal) > 1 &&
-                (animal.getMaxCountAnimalsOnLocation() - location.countCurrentAnimalOnLocation(animal)) > 2) {
-            location.addAnimal(animal);
+    public void reproduction(Location location) {
+        if (location.countCurrentAnimalOnLocation(this) > 1 &&
+                (getMaxCountAnimalsOnLocation() - location.countCurrentAnimalOnLocation(this)) > 2) {
+            location.addAnimal(this);
         }
     }
 
@@ -54,7 +54,61 @@ public abstract class Animals {
         return (int) (weighEat * 100 / this.getNeedForFood());
     }
 
-    public int getMaxCountAnimalsOnLocation(){
+    public int getMaxCountAnimalsOnLocation() {
         return maxCountOnLocation;
+    }
+
+    public void activity(Location location) {
+        setHungry(getHungry() + 10);
+
+        if (getHungry() > 100) {
+            location.deleteAnimal(this);
+        } else if (getHungry() > 50) {
+            eat(location);
+        } else {
+            if (RandomNumber.get(2) == 1) {
+                reproduction(location);
+            } else {
+                move(location);
+            }
+        }
+    }
+
+    public void move(Location location) {
+        Sides sides = directionOfMovement();
+        switch (sides) {
+            case UP -> {
+                int stepSize = RandomNumber.get(location.getMaxUp());
+                if (location.getIsland()[location.getMaxUp() - stepSize][location.getMaxLeft()]
+                        .countCurrentAnimalOnLocation(this) < getMaxCountAnimalsOnLocation()) {
+                    location.getIsland()[location.getMaxUp() - stepSize][location.getMaxLeft()].addAnimal(this);
+                    location.deleteAnimal(this);
+                }
+            }
+            case DOWN -> {
+                int stepSize = RandomNumber.get(location.getMaxDown());
+                if (location.getIsland()[location.getMaxUp() + stepSize][location.getMaxLeft()]
+                        .countCurrentAnimalOnLocation(this) < getMaxCountAnimalsOnLocation()) {
+                    location.getIsland()[location.getMaxUp() + stepSize][location.getMaxLeft()].addAnimal(this);
+                    location.deleteAnimal(this);
+                }
+            }
+            case LEFT -> {
+                int stepSize = RandomNumber.get(location.getMaxLeft());
+                if (location.getIsland()[location.getMaxUp()][location.getMaxLeft() - stepSize]
+                        .countCurrentAnimalOnLocation(this) < getMaxCountAnimalsOnLocation()) {
+                    location.getIsland()[location.getMaxUp()][location.getMaxLeft() - stepSize].addAnimal(this);
+                    location.deleteAnimal(this);
+                }
+            }
+            case RIGHT -> {
+                int stepSize = RandomNumber.get(location.getMaxRight());
+                if (location.getIsland()[location.getMaxUp()][location.getMaxLeft() + stepSize]
+                        .countCurrentAnimalOnLocation(this) < getMaxCountAnimalsOnLocation()) {
+                    location.getIsland()[location.getMaxUp()][location.getMaxLeft() + stepSize].addAnimal(this);
+                    location.deleteAnimal(this);
+                }
+            }
+        }
     }
 }

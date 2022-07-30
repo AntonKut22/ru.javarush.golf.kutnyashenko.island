@@ -2,9 +2,6 @@ package island;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-import support.RandomNumber;
-import support.Sides;
 import wildLife.Animals;
 import wildLife.herb.Herb;
 
@@ -12,17 +9,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@ToString
 @Getter
 @Setter
 public class Location {
 
-    private int countAnimalsOnLocation = 0;
-    private int countHerbsOnLocation = 0;
+    private int countAnimalsOnLocation;
+    private int countHerbsOnLocation;
     private List<Animals> animals;
     private List<Herb> herb;
 
-    private Location[][] island;
+    Location[][] island;
+
     private int maxUp;
     private int maxDown;
     private int maxLeft;
@@ -40,8 +37,8 @@ public class Location {
     // реализовал статистику по каждой локации, но в данной реализации не использую
     public void printAllAnimals() {
 
-        Map<String, Integer> staticticAnimal = statisticAllAnimalOnLocation();
-        for (Map.Entry<String, Integer> stringIntegerEntry : staticticAnimal.entrySet()) {
+        Map<String, Integer> statisticAnimal = statisticAllAnimalOnLocation();
+        for (Map.Entry<String, Integer> stringIntegerEntry : statisticAnimal.entrySet()) {
             System.out.println(stringIntegerEntry.getKey() + " - " + stringIntegerEntry.getValue());
         }
         System.out.println("Всего животных - " + countAnimalsOnLocation);
@@ -100,56 +97,7 @@ public class Location {
         return count;
     }
 
-    public void moveAnimals(Animals animals) {
-        Sides sides = animals.directionOfMovement();
-        switch (sides) {
-            case UP -> {
-                int stepSize = RandomNumber.get(maxUp);
-                if (island[maxUp - stepSize][maxLeft].countCurrentAnimalOnLocation(animals) < animals.getMaxCountAnimalsOnLocation()) {
-                    island[maxUp - stepSize][maxLeft].addAnimal(animals);
-                    deleteAnimal(animals);
-                }
-            }
-            case DOWN -> {
-                int stepSize = RandomNumber.get(maxDown);
-                if (island[maxUp + stepSize][maxLeft].countCurrentAnimalOnLocation(animals) < animals.getMaxCountAnimalsOnLocation()) {
-                    island[maxUp + stepSize][maxLeft].addAnimal(animals);
-                    deleteAnimal(animals);
-                }
-            }
-            case LEFT -> {
-                int stepSize = RandomNumber.get(maxLeft);
-                if (island[maxUp][maxLeft - stepSize].countCurrentAnimalOnLocation(animals) < animals.getMaxCountAnimalsOnLocation()) {
-                    island[maxUp][maxLeft - stepSize].addAnimal(animals);
-                    deleteAnimal(animals);
-                }
-            }
-            case RIGHT -> {
-                int stepSize = RandomNumber.get(maxRight);
-                if (island[maxUp][maxLeft + stepSize].countCurrentAnimalOnLocation(animals) < animals.getMaxCountAnimalsOnLocation()) {
-                    island[maxUp][maxLeft + stepSize].addAnimal(animals);
-                    deleteAnimal(animals);
-                }
-            }
-        }
-    }
-
     public void activityAnimals() {
-        this.getAnimals().forEach(animal -> {
-            animal.setHungry(animal.getHungry() + 10);
-
-            if (animal.getHungry() > 100) {
-                this.deleteAnimal(animal);
-            } else if (animal.getHungry() > 50) {
-                animal.eat(this);
-            } else {
-
-                if (RandomNumber.get(2) == 1) {
-                    animal.reproduction(this, animal);
-                } else {
-                    this.moveAnimals(animal);
-                }
-            }
-        });
+        animals.forEach(animal -> animal.activity(this));
     }
 }
