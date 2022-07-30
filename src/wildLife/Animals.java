@@ -12,7 +12,7 @@ public abstract class Animals {
     private static int maxCountOnLocation;
 
     @Setter
-    private int hungry = 0;
+    private int hungry;
 
     private double weigh;
 
@@ -57,5 +57,4 @@ public abstract class Animals {
     public int getMaxCountAnimalsOnLocation(){
         return maxCountOnLocation;
     }
-
 }

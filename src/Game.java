@@ -50,7 +50,7 @@ public class Game {
         }
 
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(3);
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
 
         scheduledExecutorService.scheduleAtFixedRate(() ->
                 locationList.forEach(Location::addHerb), 0, 1, TimeUnit.SECONDS);
@@ -58,8 +58,10 @@ public class Game {
         scheduledExecutorService.scheduleAtFixedRate(() -> locationList.forEach(location ->
                 executorService.submit(location::activityAnimals)), 0, 1, TimeUnit.SECONDS);
 
-        PrintStatistic printStatictic = new PrintStatistic(island);
-        scheduledExecutorService.scheduleAtFixedRate(printStatictic, 1, 5, TimeUnit.SECONDS);
+//        scheduledExecutorService.scheduleAtFixedRate(locationList.get(0).printAllAnimals(), 1, 5, TimeUnit.SECONDS);
+
+        PrintStatistic printStatistic = new PrintStatistic(island);
+        scheduledExecutorService.scheduleAtFixedRate(printStatistic, 1, 5, TimeUnit.SECONDS);
     }
 
 }

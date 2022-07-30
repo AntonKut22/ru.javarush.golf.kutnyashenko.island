@@ -28,11 +28,12 @@ public class Location {
     private int maxLeft;
     private int maxRight;
 
-    public Location(int maxUp, int maxDown, int maxLeft, int maxRight) {
+    public Location(int maxUp, int maxDown, int maxLeft, int maxRight, Location[][] island) {
         this.maxUp = maxUp;
         this.maxDown = maxDown;
         this.maxLeft = maxLeft;
         this.maxRight = maxRight;
+        this.island = island;
     }
 
 
@@ -74,10 +75,10 @@ public class Location {
 
 
     public void addHerb() {
-        if (countHerbsOnLocation > (Herb.getMaxCountOnLocation() - 10)) {
+        if (countHerbsOnLocation > (Herb.getMaxCountOnLocation() - 50)) {
             countHerbsOnLocation = Herb.getMaxCountOnLocation();
         } else {
-            countHerbsOnLocation += 10;
+            countHerbsOnLocation += 50;
         }
     }
 
@@ -151,5 +152,4 @@ public class Location {
             }
         });
     }
-
 }

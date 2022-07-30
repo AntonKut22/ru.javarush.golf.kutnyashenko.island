@@ -25,7 +25,7 @@ public class CreateIsland {
                 List<Herb> herbList = new ArrayList<>();
 
                 island[i][j] = new Location(i, island.length - i - 1,
-                        j, island[i].length - j - 1);
+                        j, island[i].length - j - 1, island);
                 island[i][j].setCountAnimalsOnLocation(createListAnimals(animalsList));
                 island[i][j].setCountHerbsOnLocation(createListHerb(herbList, island[i][j]));
                 island[i][j].setAnimals(animalsList);

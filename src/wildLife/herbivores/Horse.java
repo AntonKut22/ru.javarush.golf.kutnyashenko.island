@@ -5,12 +5,12 @@ import wildLife.Herbivore;
 
 public class Horse extends Herbivore {
 
+    @Getter
+    private static int maxCountOnLocation = 20;
+
     public Horse() {
         super(400, 4, 60);
     }
-
-    @Getter
-    private static int maxCountOnLocation = 20;
 
     @Override
     public int getMaxCountAnimalsOnLocation() {
