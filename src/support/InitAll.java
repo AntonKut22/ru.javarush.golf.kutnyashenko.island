@@ -10,8 +10,8 @@ import java.util.*;
 
 public final class InitAll {
 
-
-
+    private InitAll() {
+    }
 
     public static Map<String, Integer> initAllAtIsland() {
 

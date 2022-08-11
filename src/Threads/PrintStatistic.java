@@ -1,6 +1,7 @@
-package support;
+package Threads;
 
 import island.Location;
+import support.InitAll;
 
 import java.util.Map;
 

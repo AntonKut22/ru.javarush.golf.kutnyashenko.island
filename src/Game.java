@@ -1,17 +1,10 @@
+import Threads.GameWorker;
 import island.CreateIsland;
 import island.Location;
-import support.PrintStatistic;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class Game {
 
@@ -43,23 +36,7 @@ public class Game {
 
         Location[][] islandModel = CreateIsland.createIsland(x, y);
 
-        List<Location> locationList = new ArrayList<>();
-
-        for (Location[] locations : islandModel) {
-            locationList.addAll(Arrays.asList(locations));
-        }
-
-        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(6);
-        ExecutorService executorService = Executors.newCachedThreadPool();
-
-        scheduledExecutorService.scheduleAtFixedRate(() -> locationList.forEach(location ->
-                executorService.submit(location::addHerb)), 0, 1, TimeUnit.SECONDS);
-
-        scheduledExecutorService.scheduleAtFixedRate(() -> locationList.forEach(location ->
-                executorService.submit(location::activityAnimals)), 0, 1, TimeUnit.SECONDS);
-
-        PrintStatistic printStatistic = new PrintStatistic(islandModel);
-        scheduledExecutorService.scheduleAtFixedRate(printStatistic, 1, 5, TimeUnit.SECONDS);
+        GameWorker gameWorker = new GameWorker(islandModel);
+        gameWorker.start();
     }
-
 }

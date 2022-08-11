@@ -1,7 +1,6 @@
 package island;
 
 
-import lombok.Getter;
 import support.RandomNumber;
 import wildLife.Animals;
 import wildLife.AnimalArray;

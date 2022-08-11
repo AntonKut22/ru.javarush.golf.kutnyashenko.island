@@ -96,8 +96,4 @@ public class Location {
         }
         return count;
     }
-
-    public void activityAnimals() {
-        animals.forEach(animal -> animal.activity(this));
-    }
 }
