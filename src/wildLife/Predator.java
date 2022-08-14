@@ -30,12 +30,16 @@ public abstract class Predator extends Animals {
                 break;
             }
             double needEatForFullSatiety = this.percentHungryToKilogram();
-            if (extraction.getWeigh() > needEatForFullSatiety) {
-                this.setHungry(0);
-                location.deleteAnimal(extraction);
-            } else {
-                this.setHungry(this.getHungry() - this.kilogramToPercentHungry(extraction.getWeigh()));
-            }
+            eatingAnimal(location, extraction, needEatForFullSatiety);
+        }
+    }
+
+    private void eatingAnimal(Location location, Animals extraction, double needEatForFullSatiety) {
+        if (extraction.getWeigh() > needEatForFullSatiety) {
+            this.setHungry(0);
+            location.deleteAnimal(extraction);
+        } else {
+            this.setHungry(this.getHungry() - this.kilogramToPercentHungry(extraction.getWeigh()));
         }
     }
 

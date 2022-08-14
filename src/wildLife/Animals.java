@@ -77,38 +77,46 @@ public abstract class Animals {
     public void move(Location location) {
         Sides sides = directionOfMovement();
         switch (sides) {
-            case UP -> {
-                int stepSize = RandomNumber.get(location.getMaxUp());
-                if (location.getIsland()[location.getMaxUp() - stepSize][location.getMaxLeft()]
-                        .countCurrentAnimalOnLocation(this) < getMaxCountAnimalsOnLocation()) {
-                    location.getIsland()[location.getMaxUp() - stepSize][location.getMaxLeft()].addAnimal(this);
-                    location.deleteAnimal(this);
-                }
-            }
-            case DOWN -> {
-                int stepSize = RandomNumber.get(location.getMaxDown());
-                if (location.getIsland()[location.getMaxUp() + stepSize][location.getMaxLeft()]
-                        .countCurrentAnimalOnLocation(this) < getMaxCountAnimalsOnLocation()) {
-                    location.getIsland()[location.getMaxUp() + stepSize][location.getMaxLeft()].addAnimal(this);
-                    location.deleteAnimal(this);
-                }
-            }
-            case LEFT -> {
-                int stepSize = RandomNumber.get(location.getMaxLeft());
-                if (location.getIsland()[location.getMaxUp()][location.getMaxLeft() - stepSize]
-                        .countCurrentAnimalOnLocation(this) < getMaxCountAnimalsOnLocation()) {
-                    location.getIsland()[location.getMaxUp()][location.getMaxLeft() - stepSize].addAnimal(this);
-                    location.deleteAnimal(this);
-                }
-            }
-            case RIGHT -> {
-                int stepSize = RandomNumber.get(location.getMaxRight());
-                if (location.getIsland()[location.getMaxUp()][location.getMaxLeft() + stepSize]
-                        .countCurrentAnimalOnLocation(this) < getMaxCountAnimalsOnLocation()) {
-                    location.getIsland()[location.getMaxUp()][location.getMaxLeft() + stepSize].addAnimal(this);
-                    location.deleteAnimal(this);
-                }
-            }
+            case UP ->   up(location);
+            case DOWN -> down(location);
+            case LEFT -> left(location);
+            case RIGHT -> right(location);
+        }
+    }
+
+    private void right(Location location) {
+        int stepSize = RandomNumber.get(location.getMaxRight());
+        if (location.getIsland()[location.getMaxUp()][location.getMaxLeft() + stepSize]
+                .countCurrentAnimalOnLocation(this) < getMaxCountAnimalsOnLocation()) {
+            location.getIsland()[location.getMaxUp()][location.getMaxLeft() + stepSize].addAnimal(this);
+            location.deleteAnimal(this);
+        }
+    }
+
+    private void left(Location location) {
+        int stepSize = RandomNumber.get(location.getMaxLeft());
+        if (location.getIsland()[location.getMaxUp()][location.getMaxLeft() - stepSize]
+                .countCurrentAnimalOnLocation(this) < getMaxCountAnimalsOnLocation()) {
+            location.getIsland()[location.getMaxUp()][location.getMaxLeft() - stepSize].addAnimal(this);
+            location.deleteAnimal(this);
+        }
+    }
+
+    private void down(Location location) {
+        int stepSize = RandomNumber.get(location.getMaxDown());
+        if (location.getIsland()[location.getMaxUp() + stepSize][location.getMaxLeft()]
+                .countCurrentAnimalOnLocation(this) < getMaxCountAnimalsOnLocation()) {
+            location.getIsland()[location.getMaxUp() + stepSize][location.getMaxLeft()].addAnimal(this);
+            location.deleteAnimal(this);
+        }
+    }
+
+    private void up(Location location) {
+        int stepSize = RandomNumber.get(location.getMaxUp());
+        if (location.getIsland()[location.getMaxUp() - stepSize][location.getMaxLeft()]
+                .countCurrentAnimalOnLocation(this) < getMaxCountAnimalsOnLocation()) {
+            location.getIsland()[location.getMaxUp() - stepSize][location.getMaxLeft()].addAnimal(this);
+            location.deleteAnimal(this);
         }
     }
 }

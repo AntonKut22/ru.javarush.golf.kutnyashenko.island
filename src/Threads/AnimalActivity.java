@@ -28,15 +28,19 @@ public class AnimalActivity implements Runnable {
 
     private void createActivityAnimalsForLocation(Location location) {
         if (location.statisticAllAnimalOnLocation().get(name) != 0) {
-            for (Animals animal : location.getAnimals()) {
-                if (animal.getClass().getSimpleName().equals(name)) {
-                    activityAnimals.add(animal);
+            location.getLock().lock();
+            try {
+                for (Animals animal : location.getAnimals()) {
+                    if (animal.getClass().getSimpleName().equals(name)) {
+                        activityAnimals.add(animal);
+                    }
                 }
+            } finally {
+                location.getLock().unlock();
             }
         }
         activityAnimals.forEach(animals -> animals.activity(location));
         activityAnimals.clear();
-
     }
 }
 

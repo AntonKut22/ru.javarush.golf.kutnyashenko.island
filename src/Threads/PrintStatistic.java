@@ -1,7 +1,7 @@
 package Threads;
 
 import island.Location;
-import support.InitAll;
+import support.WildLifeInitializer;
 
 import java.util.Map;
 
@@ -22,7 +22,7 @@ public class PrintStatistic implements Runnable {
     }
 
     public void printAll() {
-        Map<String, Integer> statisticAllIsland = InitAll.initAllAtIsland();
+        Map<String, Integer> statisticAllIsland = WildLifeInitializer.initAllAtIsland();
         for (Location[] locations : island) {
             for (Location location : locations) {
                 Map<String, Integer> statisticAnimalsOnLocation = location.statisticAllAnimalOnLocation();

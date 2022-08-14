@@ -8,9 +8,9 @@ import wildLife.Animals;
 import java.io.IOException;
 import java.util.*;
 
-public final class InitAll {
+public final class WildLifeInitializer {
 
-    private InitAll() {
+    private WildLifeInitializer() {
     }
 
     public static Map<String, Integer> initAllAtIsland() {
@@ -24,6 +24,11 @@ public final class InitAll {
             throw new RuntimeException(e);
         }
 
+        addWildLifeAtMap(all, set);
+        return all;
+    }
+
+    private static void addWildLifeAtMap(Map<String, Integer> all, ImmutableSet<ClassPath.ClassInfo> set) {
         for (ClassPath.ClassInfo classInfo : set) {
             if (classInfo.getPackageName().equals("wildLife.herbivores")
                     || classInfo.getPackageName().equals("wildLife.predators")
@@ -31,6 +36,5 @@ public final class InitAll {
                 all.put(classInfo.getSimpleName(), 0);
             }
         }
-        return all;
     }
 }

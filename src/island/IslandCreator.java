@@ -11,9 +11,9 @@ import wildLife.predators.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateIsland {
+public class IslandCreator {
 
-    private CreateIsland() {
+    private IslandCreator() {
     }
 
     public static Location[][] createIsland(int width, int height) {

@@ -1,7 +1,7 @@
 package Threads;
 
 import island.Location;
-import support.InitAll;
+import support.WildLifeInitializer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +10,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class GameWorker extends Thread{
+public class GameWorker extends Thread {
 
     private final Location[][] locations;
-    List<String> nameWildLife = new ArrayList<>(InitAll.initAllAtIsland().keySet());
+    List<String> nameWildLife = new ArrayList<>(WildLifeInitializer.initAllAtIsland().keySet());
 
     public GameWorker(Location[][] locations) {
         this.locations = locations;
@@ -27,7 +27,7 @@ public class GameWorker extends Thread{
         scheduledExecutorService.scheduleAtFixedRate(printStatistic, 1, 5, TimeUnit.SECONDS);
     }
 
-    private void running(){
+    private void running() {
 
         List<AnimalActivity> animalActivities = new ArrayList<>();
         for (String name : nameWildLife) {
@@ -41,5 +41,6 @@ public class GameWorker extends Thread{
         for (AnimalActivity animalActivity : animalActivities) {
             executorService.submit(animalActivity);
         }
+        executorService.shutdown();
     }
 }

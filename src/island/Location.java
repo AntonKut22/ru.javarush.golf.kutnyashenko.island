@@ -8,6 +8,8 @@ import wildLife.herb.Herb;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Getter
 @Setter
@@ -17,8 +19,8 @@ public class Location {
     private int countHerbsOnLocation;
     private List<Animals> animals;
     private List<Herb> herb;
-
     Location[][] island;
+    private final Lock lock = new ReentrantLock(true);
 
     private int maxUp;
     private int maxDown;

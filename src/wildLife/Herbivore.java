@@ -25,13 +25,18 @@ public abstract class Herbivore extends Animals {
             Herb herbRemains = location.getHerb().get(numberHerbOnList);
             double weighHerb = herbRemains.getRemainsHerb();
             double needEatForFullSatiety = this.percentHungryToKilogram();
-            if (weighHerb > needEatForFullSatiety) {
-                herbRemains.setRemainsHerb(weighHerb - needEatForFullSatiety);
-                this.setHungry(0);
-            } else {
-                this.setHungry(this.getHungry() - this.kilogramToPercentHungry(weighHerb));
-                location.deleteHerb(numberHerbOnList);
-            }
+            eatingHerb(location, numberHerbOnList, herbRemains, weighHerb, needEatForFullSatiety);
+        }
+    }
+
+    private void eatingHerb(Location location, int numberHerbOnList,
+                            Herb herbRemains, double weighHerb, double needEatForFullSatiety) {
+        if (weighHerb > needEatForFullSatiety) {
+            herbRemains.setRemainsHerb(weighHerb - needEatForFullSatiety);
+            this.setHungry(0);
+        } else {
+            this.setHungry(this.getHungry() - this.kilogramToPercentHungry(weighHerb));
+            location.deleteHerb(numberHerbOnList);
         }
     }
 

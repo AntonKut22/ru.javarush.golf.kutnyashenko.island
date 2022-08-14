@@ -1,5 +1,5 @@
 import Threads.GameWorker;
-import island.CreateIsland;
+import island.IslandCreator;
 import island.Location;
 
 import java.io.BufferedReader;
@@ -34,7 +34,7 @@ public class Game {
             throw new RuntimeException(e);
         }
 
-        Location[][] islandModel = CreateIsland.createIsland(x, y);
+        Location[][] islandModel = IslandCreator.createIsland(x, y);
 
         GameWorker gameWorker = new GameWorker(islandModel);
         gameWorker.start();
